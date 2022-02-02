@@ -1,5 +1,5 @@
 
-const perguntasFeitas = [];
+let perguntasFeitas = [];
 
 
 // Perguntas do Jogo
@@ -29,6 +29,9 @@ const perguntas = [
 var qtdPerguntas = perguntas.length - 1;
 // console.log(qtdPerguntas);
 gerarPergunta(qtdPerguntas)
+$(document).ready(function () {
+    $("#status").hide();
+})
 
 function gerarPergunta(maxPerguntas) {
     //gerar um numero aleatorio
@@ -70,42 +73,72 @@ function gerarPergunta(maxPerguntas) {
     }
 }
 
-$('.respostas').click(function(){
-    $(".respostas").each(function(){
-        if($(this).hasClass("selecionada")){
-            $(this).removeClass('selecionada')
+$('.respostas').click(function () {
+    resetaBotoes();
+    $(this).addClass('selecionada');
+});
+
+$("#confirm").click(function () {
+    var indice = $("#pergunta").attr('data-indice');
+    var respCerta = perguntas[indice].correta;
+    console.log(respCerta)
+
+    //resposta selecionada pelo usuario
+    $(".respostas").each(function () {
+        if ($(this).hasClass('selecionada')) {
+            var respostaEscolhida = $(this).attr('id');
+
+            if (respCerta == respostaEscolhida) {
+                console.log('acertou miseravel')
+                proximaPergunta()
+            }
+            else {
+                console.log('errou')
+                $("#" + respCerta).addClass('correta');
+                $("#" + respostaEscolhida).removeClass('selecionada');
+                $("#" + respostaEscolhida).addClass('errada');
+                setTimeout(function () {
+                    newGame()
+                }, 4000);
+            }
         }
     })
-    $(this).addClass('selecionada');
-}); 
+});
 
-$("#confirm").click(function(){
-  var indice= $("#pergunta").attr('data-indice');
-  var respCerta= perguntas[indice].correta;
-  console.log(respCerta)
+function newGame() {
+    $("#quiz").hide();
+    $("#status").show(function(){
+    $("#mensagem").append(  perguntasFeitas.length-1 + ' perguntas respondidas. dejesa continuar a jogar?')
+    $("#novoJogo").click(function () {
+        perguntasFeitas = [];
+            resetaBotoes();
+            $("#quiz").show();
+            gerarPergunta(qtdPerguntas);
+            $("#status").hide();
+        });
+    
 
-  //resposta selecionada pelo usuario
-  $(".respostas").each(function(){
-    if($(this).hasClass('selecionada')){
-      var respostaEscolhida= $(this).attr('id');
-
-      if(respCerta == respostaEscolhida){
-        console.log('acertou miseravel')
-        proximaPergunta()
-    }
-    else{
-      alert('errou')
-  }
-    }
-  })
-})
-
-function proximaPergunta(){
-    $(".respostas").each(function(){
-        if($(this).hasClass("selecionada")){
-            $(this).removeClass('selecionada')
-        }
     });
+    
+
+}
+
+function proximaPergunta() {
+    resetaBotoes();
 
     gerarPergunta(qtdPerguntas);
+}
+
+function resetaBotoes() {
+    $(".respostas").each(function () {
+        if ($(this).hasClass("selecionada")) {
+            $(this).removeClass('selecionada')
+        }
+        if ($(this).hasClass("correta")) {
+            $(this).removeClass('correta')
+        }
+        if ($(this).hasClass("errada")) {
+            $(this).removeClass('errada')
+        }
+    });
 }
