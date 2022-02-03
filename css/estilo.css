@@ -73,11 +73,17 @@ button{
 }
 
 #status{
-    margin-top:  20%;
+   padding:10;
+  
 }
 
 #novoJogo{
     background: black;
     color: white;
     margin: auto auto;
+    cursor: pointer;
+}
+
+.oculto{
+    display: none;
 }

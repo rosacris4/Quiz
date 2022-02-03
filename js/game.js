@@ -29,9 +29,7 @@ const perguntas = [
 var qtdPerguntas = perguntas.length - 1;
 // console.log(qtdPerguntas);
 gerarPergunta(qtdPerguntas)
-$(document).ready(function () {
-    $("#status").hide();
-})
+
 
 function gerarPergunta(maxPerguntas) {
     //gerar um numero aleatorio
@@ -69,13 +67,19 @@ function gerarPergunta(maxPerguntas) {
         }
         else {
             console.log('Acabaram as perguntas')
+            $("#quiz").addClass('oculto');
+            $("#mensagem").html('parabéns, você vence!! acertou todas as perguntas')
+            $("#status").removeClass('oculto');
         }
     }
 }
 
 $('.respostas').click(function () {
-    resetaBotoes();
-    $(this).addClass('selecionada');
+    if ($("#quiz").attr('data-status') !== 'travado') {
+        resetaBotoes();
+        $(this).addClass('selecionada');
+    }
+
 });
 
 $("#confirm").click(function () {
@@ -94,11 +98,13 @@ $("#confirm").click(function () {
             }
             else {
                 console.log('errou')
+                $("#quiz").attr('data-status', 'travado')
+                $("#confirm").addClass('oculto')
                 $("#" + respCerta).addClass('correta');
                 $("#" + respostaEscolhida).removeClass('selecionada');
                 $("#" + respostaEscolhida).addClass('errada');
                 setTimeout(function () {
-                    newGame()
+                    gameOver()
                 }, 4000);
             }
         }
@@ -106,21 +112,13 @@ $("#confirm").click(function () {
 });
 
 function newGame() {
-    $("#quiz").hide();
-    $("#status").show(function(){
-    $("#mensagem").append(  perguntasFeitas.length-1 + ' perguntas respondidas. dejesa continuar a jogar?')
-    $("#novoJogo").click(function () {
-        perguntasFeitas = [];
-            resetaBotoes();
-            $("#quiz").show();
-            gerarPergunta(qtdPerguntas);
-            $("#status").hide();
-        });
-    
-
-    });
-    
-
+    $("#confirm").removeClass('oculto')
+    $("#quiz").attr('data-status', 'ok')
+    perguntasFeitas = [];
+    resetaBotoes();
+    gerarPergunta(qtdPerguntas);
+    $("#quiz").removeClass('oculto');
+    $("#status").addClass('oculto');
 }
 
 function proximaPergunta() {
@@ -142,3 +140,13 @@ function resetaBotoes() {
         }
     });
 }
+
+function gameOver() {
+    $("#quiz").addClass('oculto');
+    $("#mensagem").html('Game Over!!!')
+    $("#status").removeClass('oculto');
+}
+
+$("#novoJogo").click(function () {
+    newGame();
+})

@@ -8,7 +8,7 @@
     <title>Quiz</title>
 </head>
 <body>
-  <div id="quiz">
+  <div id="quiz" data-status="ok">
       <h2 id="pergunta">Aqui vai a Pergunta</h2>
       <div id="respostas">
           <button id="resp0" class="respostas">Aqui resposta 1</button>
@@ -21,9 +21,9 @@
   </div>
     
 
-  <div id="status">
-      <h2 id="mensagem">Game Over!!!!</h2>
-      <button id="novoJogo">Confirmar</button>
+  <div id="status" class="oculto">
+      <h2 id="mensagem">Game Over!!!! <br><br></h2>
+      <button id="novoJogo">Jogar Novamente</button>
 
   </div>
    <script src="js/jquery-3.6.0.min.js"></script>
