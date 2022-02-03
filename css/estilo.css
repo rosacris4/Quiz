@@ -92,3 +92,7 @@ button{
 .outroFundo{
     background: green;
 }
+
+#titulo{
+    color: rgb(10, 151, 10);
+}

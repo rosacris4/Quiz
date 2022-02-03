@@ -1,26 +1,25 @@
 
 let perguntasFeitas = [];
 
-
 // Perguntas do Jogo
 const perguntas = [
     {
-        pergunta: "quais dessas linguagens não é uma linguagem de programação",
+        pergunta: "quais dessas linguagens não é uma linguagem de programação?",
         resposta: ["PHP", "Javascript", "C++", "HTML"],
         correta: "resp3"
     },
     {
-        pergunta: "Em que data marca o inicio da luta armada angolana",
+        pergunta: "Em que data marca o inicio da luta armada angolana?",
         resposta: ["1 de janeiro", "4 de fevereiro", "4 de abril", "8 de março"],
         correta: "resp1"
     },
     {
-        pergunta: "O que significa a sigla HTML",
+        pergunta: "O que significa a sigla HTML?",
         resposta: ["Hyper Text Mark Lang", "Hyper Tonto Maluco legal", "Hyper Text Markup Language", "Homem temente mastiga louvor"],
         correta: "resp2"
     },
     {
-        pergunta: "Quais dessas linguagens é considerada de marcação",
+        pergunta: "Quais dessas linguagens é considerada de marcação?",
         resposta: ["HTML", "Javascript", "PHP", "C++",],
         correta: "resp0"
     }
@@ -29,7 +28,6 @@ const perguntas = [
 var qtdPerguntas = perguntas.length - 1;
 // console.log(qtdPerguntas);
 gerarPergunta(qtdPerguntas)
-
 
 function gerarPergunta(maxPerguntas) {
     //gerar um numero aleatorio
@@ -124,7 +122,6 @@ function newGame() {
 
 function proximaPergunta() {
     resetaBotoes();
-
     gerarPergunta(qtdPerguntas);
 }
 
