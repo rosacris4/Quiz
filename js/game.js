@@ -68,8 +68,9 @@ function gerarPergunta(maxPerguntas) {
         else {
             console.log('Acabaram as perguntas')
             $("#quiz").addClass('oculto');
-            $("#mensagem").html('parabéns, você vence!! acertou todas as perguntas')
+            $("#mensagem").html(`parabéns, você vence!! <br> acertou todas as perguntas <br> você conseguiu ${((perguntasFeitas.length-1)*5)+5} pontos`)
             $("#status").removeClass('oculto');
+            
         }
     }
 }
@@ -144,6 +145,7 @@ function resetaBotoes() {
 function gameOver() {
     $("#quiz").addClass('oculto');
     $("#mensagem").html('Game Over!!!')
+    $("#mensagem").html(`Game Over!!! <br> você conseguiu ${(perguntasFeitas.length-1)*5} pontos`)
     $("#status").removeClass('oculto');
 }
 

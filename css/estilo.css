@@ -74,6 +74,7 @@ button{
 
 #status{
    padding:10;
+   margin-top: 20%;
   
 }
 
@@ -86,4 +87,8 @@ button{
 
 .oculto{
     display: none;
+}
+
+.outroFundo{
+    background: green;
 }
